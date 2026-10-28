@@ -1,0 +1,14 @@
+services:
+  workflow-demo:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      DEMO_DB_PATH: /demo/.data/workflows.sqlite
+      DEMO_SEED: "true"
+    volumes:
+      - demo-data:/demo/.data
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  demo-data:
