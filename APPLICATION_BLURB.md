@@ -1,8 +1,8 @@
 # Application-ready public repository description
 
-**Use only once this code has been reviewed and actually published to your GitHub account.** Replace the placeholder URL with the real repository link.
+**Use after reviewing the public repository and verifying its latest CI checks.**
 
-> Public repo: `https://github.com/YOUR_USERNAME/napali-studio-public-demo`
+> Public repo: `https://github.com/jmourrai/napali-studio-public-demo`
 >
 > I worked with AI assistance to develop a public engineering demonstration related to the types of workflow challenges I address in my private Nā Pali Studio project. The repository contains newly authored, nonproprietary code—not an export of the private application—and synthetic example data. It includes a working FastAPI/SQLite workflow API, a browser UI, explicit state transitions, optimistic version checks, an audit event history, tests, CI configuration, and documentation in `AGENTS.md`, `CLAUDE.md`, and `SKILL.md`.
 >

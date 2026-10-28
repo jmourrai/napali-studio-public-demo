@@ -102,8 +102,9 @@ class Store:
         with self.connect() as con:
             con.execute("BEGIN IMMEDIATE")
             con.execute(
-                """INSERT INTO work_items(id,title,description,priority,status,version,created_at,updated_at)
-                VALUES (?,?,?,?, 'intake',1,?,?)""",
+                """INSERT INTO work_items(
+                id,title,description,priority,status,version,created_at,updated_at
+                ) VALUES (?,?,?,?, 'intake',1,?,?)""",
                 (item_id, title, description, priority, now, now),
             )
             con.execute(
@@ -169,13 +170,27 @@ class Store:
         if self.counts()["total"]:
             return
         for title, desc, priority, states in [
-            ("Draft example release note", "Demonstrate a generic review workflow", "high", ["review"]),
-            ("Validate sample dashboard", "Synthetic metrics and display checks", "medium", ["review", "in_progress"]),
-            ("Approve placeholder summary", "Contains no real business or client information", "high", ["review", "in_progress", "approval"]),
-            ("Publish demonstration guide", "Safe documentation using fabricated content", "low", ["review", "in_progress", "approval", "published"]),
+            (
+                "Draft example release note", "Demonstrate a generic review workflow",
+                "high", ["review"],
+            ),
+            (
+                "Validate sample dashboard", "Synthetic metrics and display checks",
+                "medium", ["review", "in_progress"],
+            ),
+            (
+                "Approve placeholder summary", "No real business or client information",
+                "high", ["review", "in_progress", "approval"],
+            ),
+            (
+                "Publish demonstration guide", "Safe documentation using fabricated content",
+                "low", ["review", "in_progress", "approval", "published"],
+            ),
             ("Triage new sample request", "Illustrative backlog item only", "medium", []),
         ]:
             item = self.create_item(title=title, description=desc, priority=priority)
             for state in states:
-                item = self.transition(item["id"], to_status=state, expected_version=item["version"],
-                                       note="Synthetic demonstration progression")
+                item = self.transition(
+                    item["id"], to_status=state, expected_version=item["version"],
+                    note="Synthetic demonstration progression",
+                )
